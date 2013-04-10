@@ -1,0 +1,31 @@
+{
+  "name": "rigsketballBracket",
+  "version": "0.0.1",
+  "description": "web interface for orgnaizing the 2013 rigsketball bracket",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~3.1.0",
+    "ecstatic": "~0.4.1",
+    "passport": "~0.1.16",
+    "config-heroku": "~0.1.1a",
+    "connect-mongo": "~0.3.2",
+    "ejs-locals": "~1.0.2",
+    "password-hash": "~1.2.1",
+    "underscore": "~1.4.4",
+    "wrench": "~1.4.4",
+    "mongodb": "~1.2.14",
+    "async-resource": "0.0.1",
+    "passport-local": "~0.1.6",
+    "toobusy": "~0.2.3",
+    "async": "~0.2.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jesseditson/rigsketballBracket.git"
+  },
+  "author": "Jesse Ditson <jesse.ditson@gmail.com>"
+}

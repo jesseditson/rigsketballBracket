@@ -1,0 +1,32 @@
+{
+  "environment" : "production",
+  "title" : "Rigsketball 2013 Bracket",
+  "db": {
+    "name": "rigsketballBrackets",
+    "host": "localhost", 
+    "port": 27017,
+    "auth" : false,
+    "indexes" : {
+      "users" : [
+        { "index" : "username", "options" : { "unique" : true } },
+        { "index" : "email", "options" : { "unique" : true } }
+      ]
+    }
+  },
+  "signupFormId" : "1K1dfK-LEkeIpHPcHElo4fY3zlRitG75fLZE0Pgf1uXE",
+  "maxTooBusyLag" : 70,
+  "port": 3000,
+  "client" : { 
+    "css" : {
+      "all" : ["style","ChunkFive/stylesheet"],
+      "touch" : [],
+      "web" : []
+    },
+    "cdnjavascripts" : {
+      "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" : "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+    },
+    "javascripts" : [
+      "brackets"
+    ]
+  }
+}

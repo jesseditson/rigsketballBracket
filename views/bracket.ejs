@@ -1,0 +1,25 @@
+<% if(band){ %>
+  <div class="bandName">
+    <% if(bracket.round == 32 && user){ %>
+      <input type="text" name="<%= band.position %>" value="<%=band.name%>"/>
+      <input type="button" class="savebutton" value="save">
+    <% } else { %>
+      <%= band.name %>
+    <%}%>
+  </div>
+  <div class="score" data-position="<%=band.position%>" data-round="<%=bracket.round%>"><%= band.scores[bracket.round] || "??"%></div>
+  <% if(typeof bracket.winner === 'number'){ %>
+    <div class="indicator <%= (bracket.winner === index) ? 'winner' : 'loser'%>"></div>
+  <%} else {%>
+    <div class="indicator"></div>
+  <%}%>
+<%} else {%>
+  <div class="bandName">
+    <% if(bracket.round == 32 && insertAllowed){ %>
+      <input type="text" name="<%= bandNum %>" placeholder="available"/>
+      <input type="button" class="savebutton confirm" value="save">
+    <%} else {%>
+      ???
+    <%}%>
+  </div>
+<%}%>

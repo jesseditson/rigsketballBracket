@@ -1,0 +1,27 @@
+<%- layout('layout') -%>
+<h1>Add a new Rigsketball 2013 Team:</h1>
+<p>Enter your info, and you'll be able to select a date on the next page.</p>
+<script type="text/javascript">var submitted=false;</script>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {window.location='/signup/submit?bandname='+$('#entry_474259624').val();}"></iframe>
+<div class="ss-form"><form action="https://docs.google.com/forms/d/<%=signupFormId%>/formResponse" method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true">
+<div class="errorbox-good">
+<div dir="ltr" class="ss-item ss-item-required ss-text"><div class="ss-form-entry"><label class="ss-q-item-label" for="entry_474259624"><div class="ss-q-title">Enter your Band Name
+<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+<span class="ss-required-asterisk">*</span></div>
+<div class="ss-q-help ss-secondary-text" dir="ltr"></div></label>
+<input type="text" name="entry.474259624" value="" class="ss-q-short" id="entry_474259624" dir="auto" aria-required="true">
+</div></div></div> <div class="errorbox-good">
+<div dir="ltr" class="ss-item ss-item-required ss-text"><div class="ss-form-entry"><label class="ss-q-item-label" for="entry_1765855241"><div class="ss-q-title">Enter your email
+<label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+<span class="ss-required-asterisk">*</span></div>
+<div class="ss-q-help ss-secondary-text" dir="ltr"></div></label>
+<input type="text" name="entry.1765855241" value="" class="ss-q-short" id="entry_1765855241" dir="auto" aria-required="true">
+</div></div></div>
+<input type="hidden" name="draftResponse" value="[]
+">
+<input type="hidden" name="pageHistory" value="0">
+
+
+<div class="ss-item ss-navigate"><div class="ss-form-entry">
+<input type="submit" name="submit" value="Submit" id="ss-submit">
+</div></div></form></div>

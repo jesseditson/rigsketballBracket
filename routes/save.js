@@ -1,0 +1,59 @@
+var db = require('../lib/mongoWrapper').db.add('bands').add('rounds')
+var async = require('async')
+var bracketData = require('../lib/bracketData')
+
+var render = function(req,res,err,data){
+  bracketData(function(err,info){
+    if(err) return res.json({error : err.message})
+    res.render('brackets',info,function(err,html){
+      if(err) throw err
+      data.html = html
+      res.send(req.query.callback + '('+JSON.stringify(data)+');')
+    })
+  })
+}
+
+var save = function(req,res,next){
+  if(req.query.operation == 'saveBand'){
+    db.bands.findOne({position : req.query.position},function(err,pBand){
+      if(err) return render(req,res,err)
+      if(pBand && !req.user) return render(req,res,new Error("You're not allowed to do that."))
+      if(pBand){
+        // editing. only name is editable
+        db.bands.update({position : req.query.position},{$set : {name : req.query.name}},function(err){
+          render(req,res,err,{})
+        })
+      } else {
+        // this is available to anyone.
+        var band = {
+          name : req.query.name,
+          position : req.query.position,
+          created_at : new Date(),
+          scores : {
+            32 : false,
+            16 : false,
+            8 : false,
+            4 : false,
+            2 : false
+          }
+        }
+        db.bands.insert(band,function(err){
+          render(req,res,err,{})
+        })
+      }
+    })
+  } else if(!req.user){
+    // authenticated save commands
+    render(req,res,new Error("You're not allowed to do that."))
+  } else if(req.query.operation == 'editScore') {
+    var up = {}
+    up['scores.' + req.query.round] = req.query.score
+    db.bands.update({position : req.query.position},{$set : up},function(err){
+      render(req,res,err,{})
+    })
+  }
+}
+
+module.exports = function(app){
+  app.get('/save',save)
+}

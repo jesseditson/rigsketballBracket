@@ -1,0 +1,23 @@
+<%- layout('layout') -%>
+<div id="brackets" class="clearfix" data-saveurl="<%=baseurl%>/save">
+  <div class="leftRounds clearfix">
+    <% Object.keys(leftBrackets).forEach(function(roundNum){ %>
+      <div class="round left round<%=roundNum%>">
+        <%- partial('round',{round : leftBrackets[roundNum]}) -%>
+      </div>
+    <% }) %>
+  </div>
+  <div class="winnerRound clearfix">
+    <%- partial('round',{round : winnerBracket}) -%>
+  </div>
+  <div class="winner">
+    <% if(winningBand){ %> <%=winningBand.name%> <%} else { %> ????? <%}%>
+  </div>
+  <div class="rightRounds clearfix">
+    <% Object.keys(rightBrackets).forEach(function(roundNum){ %>
+      <div class="round right round<%=roundNum%>">
+        <%- partial('round',{round : rightBrackets[roundNum]}) -%>
+      </div>
+    <% }) %>
+  </div>
+</div>
