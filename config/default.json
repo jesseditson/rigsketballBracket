@@ -13,6 +13,8 @@
       ]
     }
   },
+  "rootuser" : "test",
+  "rootpass" : "test",
   "signupFormId" : "1K1dfK-LEkeIpHPcHElo4fY3zlRitG75fLZE0Pgf1uXE",
   "maxTooBusyLag" : 70,
   "port": 3000,
