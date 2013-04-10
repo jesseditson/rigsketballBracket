@@ -18,6 +18,10 @@
     <% if(bracket.round == 32 && insertAllowed){ %>
       <input type="text" name="<%= bandNum %>" placeholder="available"/>
       <input type="button" class="savebutton confirm" value="save">
+    <% } else if(bracket.round == 32){ %>
+      <a href="/signup">
+        sign up!
+      </a>
     <%} else {%>
       ???
     <%}%>

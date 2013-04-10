@@ -35,4 +35,6 @@ Boom. A bracket is now visible & editable at <your app name>.herokuapp.com.
 
 ####Embed:
 
-<iframe src="http://<your app name>.herokuapp.com" width="998" height="730" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+<div style="display:block;position:relative;float:left;clear:both;width:998;height:730;">
+  <iframe src="http://<your app name>.herokuapp.com" width="998" height="730" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+</div>
