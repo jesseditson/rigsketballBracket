@@ -1,10 +1,11 @@
 <%- layout('layout') -%>
+<div id="signup">
 <h1>Add a new Rigsketball 2013 Team:</h1>
 <p>Enter your info, and you'll be able to select a date on the next page.</p>
 <script type="text/javascript">var submitted=false;</script>
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {window.location='/signup/submit?bandname='+$('#entry_383109263').val();}"></iframe>
-<div class="ss-form"><form action="https://docs.google.com/forms/d//formResponse" method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true">
-<form action="https://docs.google.com/forms/d/<%=signupFormId%>/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">
+<div class="ss-form">
+<form action="https://docs.google.com/forms/d/<%=signupFormId%>/formResponse" method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true">
 <div class="errorbox-good">
 <div dir="ltr" class="ss-item ss-item-required ss-text"><div class="ss-form-entry"><label class="ss-q-item-label" for="entry_383109263"><div class="ss-q-title">What's your band's name?
 <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
@@ -52,4 +53,5 @@
 
 <div class="ss-item ss-navigate"><div class="ss-form-entry">
 <input type="submit" name="submit" value="Submit" id="ss-submit">
-<div class="ss-secondary-text">Never submit passwords through Google Forms.</div></div></div></form>
+</div></div></form>
+</div>

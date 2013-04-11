@@ -1,6 +1,7 @@
 body, input {
   font-size:12px;
   font-family:"ChunkFiveRegular", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  color:rgb(78, 80, 62);
 }
 .userinfo {
   position:absolute;
@@ -12,6 +13,27 @@ body, input {
   width: 998px;
   height: 730px;
   z-index:0;
+}
+#signup {
+  font-size:14px;
+  text-align:center;
+  font-family:Helvetica;
+}
+#signup ul {
+ list-style-type:none; 
+}
+#signup .ss-item {
+  margin:20px;
+}
+#signup textarea {
+  width:300px;
+}
+#signup input:not([type="radio"]) {
+  width:300px;
+  font-size:20px;
+}
+#signup .secret {
+  display:none;
 }
 .secret {
   position:absolute;
