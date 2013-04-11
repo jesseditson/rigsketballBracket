@@ -9,7 +9,6 @@ $(function(){
       key = decodeURIComponent(qp[i])
     }
   }
-  console.log(query)
   
   var saveclicked = function(){
     var signingup = $(this).hasClass('confirm')
@@ -21,13 +20,72 @@ $(function(){
       }
     }
     var inp = $(this).closest('.contender').find('input')
-    save(inp,{
+    save({
       operation : 'saveBand',
       name : inp.val(),
       position : inp.attr('name')
     },function(){
       if(signingup) window.location = '/'
     })
+  }
+  
+  var datavalue = function(el,attr){
+    var v = decodeURIComponent(el.attr('data-'+attr))
+    if(v == 'false') v = ''
+    return v
+  }
+  var getOnScreenPos = function(p,s,l,t){
+    var pos = {
+      left : p.left - l,
+      top : p.top - t
+    }
+    if(pos.left < 0){
+      pos.left = p.left + s
+    }
+    return pos
+  }
+  var overlayOn = false
+  var currentBracket
+  $("body")
+    .on('click','.saveinfo',function(){
+      save({
+        operation : 'setInfo',
+        round : currentBracket.attr('data-round'),
+        position : currentBracket.attr('data-position'),
+        location : $(this).closest('#infoOverlay').find('.location').val(),
+        date : $(this).closest('#infoOverlay').find('.date').val()
+      },function(){
+        window.location.href = window.location.href
+      })
+    })
+  
+  var showInfo = function(toggle){
+    var o = $("#infoOverlay")
+    if(overlayOn) return
+    if(toggle === true) overlayOn = true
+    var b = $(this)
+    currentBracket = b
+    o.css(getOnScreenPos(b.offset(),80,350,30))
+    var b1 = b.find('.first.contender .bandName')
+    var b2 = b.find('.second.contender .bandName')
+    if(b1.find('input').length){ b1 = "???" } else { b1 = b1.html() }
+    if(b2.find('input').length){ b2 = "???"} else { b2 = b2.html() }
+    o.find('.band1').html(b1)
+    o.find('.band2').html(b2)
+    var d = o.find('.date')
+    var l = o.find('.location')
+    if(d.is('input')){
+      d.val(datavalue(b,'date'))
+    } else {
+      d.html(datavalue(b,'date'))
+    }
+    l.html(datavalue(b,'location'))
+    o.fadeIn(200)
+  }
+  var hideInfo = function(toggle){
+    if(overlayOn && toggle !== true) return
+    overlayOn = false
+    $(this).closest('.overlay').fadeOut(200)
   }
   
   $("#brackets")
@@ -44,11 +102,23 @@ $(function(){
         hideButton(savebutton)
       },200)
     })
+    .on('click','.bracket',function(){
+      showInfo.call(this,true)
+    })
+    .on('mouseenter','.bracket',showInfo)
+    .on('mouseleave','.bracket',hideInfo)
+
+  $('body')
+    .on('click','.close',function(){
+      hideInfo.call(this,true)
+    })
+    .on('mouseleave','.overlay',hideInfo)
 
   $(".loggedin #brackets")
     .on('click','.score',function(){
       if($(this).find('input').length) return
-      $(this).html('<input type="tel" placeholder="##" value="'+$(this).html()+'" name="score" class="scorenum"/><input type="button" class="savescore" value="save"/>')
+      var initialVal = parseInt($(this).html(),10)
+      $(this).html('<input type="tel" placeholder="##" value="'+initialVal+'" name="score" class="scorenum"/><input type="button" class="savescore" value="save"/>')
     })
     .on('click','.score .savescore',function(){
       var c = $(this).closest('.contender')
@@ -56,7 +126,7 @@ $(function(){
       var round = c.find('.score').attr('data-round')
       var score = c.find('.scorenum').val()
       c.find('.score').html(score)
-      save($(this),{
+      save({
         operation : 'editScore',
         score : score,
         position : num,
@@ -72,7 +142,7 @@ $(function(){
         button.removeAttr('style')
       })
     }
-    var save = function(inp,data,callback){
+    var save = function(data,callback){
       $.ajax({
         dataType: "jsonp",
         url: "/save",

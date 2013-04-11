@@ -51,6 +51,13 @@ var save = function(req,res,next){
     db.bands.update({position : req.query.position},{$set : up},function(err){
       render(req,res,err,{})
     })
+  } else if(req.query.operation == 'setInfo'){
+    var up = {}
+    if(req.query.location) up.location = req.query.location
+    if(req.query.date) up.date = req.query.date
+    db.rounds.update({round : parseInt(req.query.round,10), position : parseInt(req.query.position,10)},{$set : up},function(err,updated){
+      render(req,res,err,{})
+    })
   }
 }
 

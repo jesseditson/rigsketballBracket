@@ -1,0 +1,27 @@
+<div id="infoOverlay" class="overlay">
+  <div class="close">&#10006;</div>
+  <div class="vs clearfix">
+    <h5 class="band1"></h5>
+    <h5>~vs~</h5>
+    <h5 class="band2"></h5>
+  </div>
+  <div class="dateHolder">
+  <p>Date : </p>
+  <% if(user){%>
+    <input type="datetime" placeholder="date" class="date" name="date"/>
+  <%} else { %>
+    <h5 class="date"></h5>
+  <%}%>
+  </div>
+  <div class="locationHolder">
+  <p>Location : </p>
+  <% if(user){%>
+    <textarea class="location" name="location">location</textarea>
+  <%} else { %>
+    <h5 class="location"></h5>
+  <%}%>
+  </div>
+  <% if(user){ %>
+    <input type="button" value="save" class="saveinfo"/>
+  <%}%>
+</div>
