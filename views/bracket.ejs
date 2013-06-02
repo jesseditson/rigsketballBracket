@@ -19,7 +19,7 @@
       <input type="text" name="<%= bandNum %>" placeholder="available"/>
       <input type="button" class="savebutton confirm" value="save">
     <% } else if(bracket.round == 32){ %>
-      <a href="/signup">
+      <a href="/signup?bandNum=<%=bandNum%>">
         sign up!
       </a>
     <%} else {%>
