@@ -1,4 +1,16 @@
 $(function(){
+  // init - make sure band names are correctly sized
+  function adjustFont(){
+    var t = this
+    if(!!(t.scrollHeight - $(t).height())){
+      var fontSize = parseInt($(t).css('font-size'),10)
+      $(t).css('font-size',(--fontSize) + 'px')
+      if(fontSize > 6) adjustFont.call(t)
+    }
+  }
+  $('.bandName').each(adjustFont)
+  
+  
   var qp = window.location.search.replace(/^\?/,'').split('=')
   var query = {}
   var key
