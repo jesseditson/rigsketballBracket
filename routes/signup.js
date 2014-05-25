@@ -1,16 +1,24 @@
 var bracketData = require('../lib/bracketData')
 var save = require('../lib/save')
+var url = require('url');
 
 var render = function(req,res,next){
-  if(!req.query.bandNum) return res.redirect('/')
+  var bandNum = req.body.bandNum || req.query.bandNum;
+  if(!bandNum) return res.redirect('/')
   req.session.signingup = true
-  res.render('signup',{bandNum : req.query.bandNum})
+  res.render('signup',{bandNum : bandNum})
 }
 
 var submit = function(req,res,next){
+  // return res.json({body : req.body, query : req.query, referer : req.headers.referer});
   //if(!req.session.signingup || !req.query.bandNum) return res.redirect('/')
   //delete req.session.signingup
-  req.query.operation = 'saveBand'
+  if (!req.body || !req.body.bandNum) {
+    req.body = req.query;
+  }
+  req.body.operation = 'saveBand'
+  var parsedURL = url.parse(req.body.clickto5 || '',true);
+  req.body.position = parsedURL.query.bandNum || req.body.bandNum;
   save.call({
     render : function(req,res,err,data){
       res.redirect('/')
@@ -19,6 +27,6 @@ var submit = function(req,res,next){
 }
 
 module.exports = function(app){
-  app.get('/signup/submit',submit)
+  app.all('/signup/submit',submit)
   app.get('/signup',render)
 }

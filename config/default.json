@@ -1,9 +1,9 @@
 {
   "environment" : "production",
-  "title" : "Rigsketball 2013 Bracket",
+  "title" : "Rigsketball 2014 Bracket",
   "db": {
-    "name": "rigsketballBrackets",
-    "host": "localhost", 
+    "name": "rigsketball2014",
+    "host": "localhost",
     "port": 27017,
     "auth" : false,
     "indexes" : {
@@ -18,7 +18,7 @@
   "signupFormId" : "1K1dfK-LEkeIpHPcHElo4fY3zlRitG75fLZE0Pgf1uXE",
   "maxTooBusyLag" : 70,
   "port": 3000,
-  "client" : { 
+  "client" : {
     "css" : {
       "all" : ["style","ChunkFive/stylesheet"],
       "touch" : [],

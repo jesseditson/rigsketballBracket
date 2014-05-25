@@ -14,5 +14,10 @@ var render = function(req,res,err,data){
 }
 
 module.exports = function(app){
-  app.get('/save',save.bind({render : render}))
+  app.get('/save',function(req,res,next){
+    if (!req.body || !req.body.bandNum) {
+      req.body = req.query;
+    }
+    save.call({render : render},req,res,next);
+  })
 }

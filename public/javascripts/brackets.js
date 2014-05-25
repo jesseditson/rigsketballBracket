@@ -9,8 +9,8 @@ $(function(){
     }
   }
   $('.bandName').each(adjustFont)
-  
-  
+
+
   var qp = window.location.search.replace(/^\?/,'').split('=')
   var query = {}
   var key
@@ -21,9 +21,9 @@ $(function(){
       key = decodeURIComponent(qp[i])
     }
   }
-  
+
   var saveclicked = function(){
-    var signingup = $(this).hasClass('confirm')
+    var signingup = true;//$(this).hasClass('confirm')
     if(signingup){
       var ok = confirm("Are you sure you want to select this spot? You can't change it after you've selected it.")
       if(!ok){
@@ -34,13 +34,13 @@ $(function(){
     var inp = $(this).closest('.contender').find('input')
     save({
       operation : 'saveBand',
-      name : inp.val(),
+      bandname : inp.val(),
       position : inp.attr('name')
     },function(){
       if(signingup) window.location = '/'
     })
   }
-  
+
   var datavalue = function(el,attr){
     var v = decodeURIComponent(el.attr('data-'+attr))
     if(v == 'false') v = ''
@@ -70,7 +70,7 @@ $(function(){
         window.location.href = window.location.href
       })
     })
-  
+
   var showInfo = function(toggle){
     var o = $("#infoOverlay")
     if(overlayOn) return
@@ -99,20 +99,21 @@ $(function(){
     overlayOn = false
     $(this).closest('.overlay').fadeOut(200)
   }
-  
+
   $("#brackets")
     .on('focus','.bandName input',function(){
-      var savebutton = $(this).closest('.contender').find('.savebutton')
+      var savebutton = $(this).closest('.contender').find('.savebutton').first()
       if(query.bandname) $(this).val(query.bandname)
       savebutton.on('click',saveclicked)
       showButton(savebutton)
     })
-    .on('blur','.bandName input',function(){
-      var savebutton = $(this).closest('.contender').find('.savebutton')
-      setTimeout(function(){
-        savebutton.off('click')
-        hideButton(savebutton)
-      },200)
+    .on('blur','.bandName input',function(e){
+      if ($(e.currentTarget).is('input')) {
+        saveclicked.call(this,e);
+      }
+      var savebutton = $(this).closest('.contender').find('.savebutton').first()
+      savebutton.off('click')
+      hideButton(savebutton)
     })
     .on('click','.bracket',function(){
       showInfo.call(this,true)
@@ -145,7 +146,7 @@ $(function(){
         round : round
       })
     })
-    
+
     var showButton = function(button){
       button.show().css({opacity : 0,left:0}).animate({left:90,opacity:1},200)
     }
