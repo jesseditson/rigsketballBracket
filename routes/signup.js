@@ -15,8 +15,18 @@ var submit = function(req,res,next){
   //delete req.session.signingup
   console.log('signup body',req.body,'query',req.query);
   req.body.operation = 'saveBand'
-  var parsedURL = url.parse(req.body.clickto5 || '',true);
-  req.body.position = parsedURL.query.bandNum || req.body.bandNum;
+  var bandNum = req.body.bandNum;
+  if (!bandNum) {
+    Object.keys(req.body).forEach(function(key){
+      if (/clickTo\d+/.test(key)) {
+        var parsedURL = url.parse(req.body[key] || '',true);
+        if (parsedURL && parsedURL.query && parsedURL.query.bandNum) {
+          bandNum = parsedURL.query.bandNum
+        }
+      }
+    });
+  }
+  req.body.position = bandNum;
   save.call({
     render : function(req,res,err,data){
       res.redirect('/')
