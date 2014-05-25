@@ -13,9 +13,7 @@ var submit = function(req,res,next){
   // return res.json({body : req.body, query : req.query, referer : req.headers.referer});
   //if(!req.session.signingup || !req.query.bandNum) return res.redirect('/')
   //delete req.session.signingup
-  if (!req.body || !req.body.bandNum) {
-    req.body = req.query;
-  }
+  console.log('signup body',req.body,'query',req.query);
   req.body.operation = 'saveBand'
   var parsedURL = url.parse(req.body.clickto5 || '',true);
   req.body.position = parsedURL.query.bandNum || req.body.bandNum;
