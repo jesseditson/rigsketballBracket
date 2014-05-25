@@ -18,10 +18,13 @@ var submit = function(req,res,next){
   var bandNum = req.body.bandNum;
   if (!bandNum) {
     Object.keys(req.body).forEach(function(key){
-      if (/clickTo\d+/.test(key)) {
+      if (/clickto\d+/i.test(key)) {
+        console.log('found key',key);
         var parsedURL = url.parse(req.body[key] || '',true);
+        console.log('parsed url ',parsedURL);
         if (parsedURL && parsedURL.query && parsedURL.query.bandNum) {
           bandNum = parsedURL.query.bandNum
+          console.log('band num', bandNum);
         }
       }
     });
