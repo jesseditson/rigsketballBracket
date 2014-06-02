@@ -20,7 +20,7 @@
   "port": 3000,
   "client" : {
     "css" : {
-      "all" : ["style","ChunkFive/stylesheet"],
+      "all" : ["style","Existence/stencil/stylesheet","Existence/unicase/stylesheet"],
       "touch" : [],
       "web" : []
     },

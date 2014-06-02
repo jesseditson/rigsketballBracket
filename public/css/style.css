@@ -1,7 +1,15 @@
 body, input {
   font-size:12px;
-  font-family:"Verdana", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  font-family:"existenceunicase_light", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  font-weight:700;
   color:rgb(78, 80, 62);
+}
+a {
+  color:rgb(71,71,71);
+  text-decoration:none;
+}
+a:hover {
+  color:black;
 }
 .userinfo {
   position:absolute;
