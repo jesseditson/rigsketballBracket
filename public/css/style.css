@@ -1,6 +1,6 @@
 body, input {
   font-size:12px;
-  font-family:"ChunkFiveRegular", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  font-family:"Verdana", "Helvetica Neue", "Helvetica", Arial, sans-serif;
   color:rgb(78, 80, 62);
 }
 .userinfo {
@@ -20,7 +20,7 @@ body, input {
   font-family:Helvetica;
 }
 #signup ul {
- list-style-type:none; 
+ list-style-type:none;
 }
 #signup .ss-item {
   margin:20px;
@@ -66,8 +66,8 @@ body, input {
   color:black;
 }
 .contender {
-  background-color:#f2f2f2;
-  box-shadow: 0px 0px 5px 0px #999;
+  background-color:#ccc;
+  /*box-shadow: 0px 0px 5px 0px #999;*/
   line-height: 0px 0px 5px 0px rgb(153, 153, 153);
   border: 1px solid #999;
   padding:8px;
@@ -75,24 +75,10 @@ body, input {
   height: 16px;
   text-align:center;
   position:relative;
-  border-radius:3px;
-  /* IE10 Consumer Preview */ 
-background-image: -ms-linear-gradient(top, #FFFEED 0%, #EFE1C6 100%);
+  border-radius:2px;
+}
+.contender.second {
 
-/* Mozilla Firefox */ 
-background-image: -moz-linear-gradient(top, #FFFEED 0%, #EFE1C6 100%);
-
-/* Opera */ 
-background-image: -o-linear-gradient(top, #FFFEED 0%, #EFE1C6 100%);
-
-/* Webkit (Safari/Chrome 10) */ 
-background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFEED), color-stop(1, #EFE1C6));
-
-/* Webkit (Chrome 11+) */ 
-background-image: -webkit-linear-gradient(top, #FFFEED 0%, #EFE1C6 100%);
-
-/* W3C Markup, IE10 Release Preview */ 
-background-image: linear-gradient(to bottom, #FFFEED 0%, #EFE1C6 100%);
 }
 .contender .indicator {
   right: -38px;
@@ -216,6 +202,8 @@ background-image: linear-gradient(to bottom, #FFFEED 0%, #EFE1C6 100%);
   font-size:14px;
   margin:0px;
   padding: 5px 10px;
+}
+.overlay .date.editable, .overlay .location.editable {
   background-color:#fff;
 }
 .overlay .location {
@@ -224,7 +212,6 @@ background-image: linear-gradient(to bottom, #FFFEED 0%, #EFE1C6 100%);
   font-size:14px;
   margin:0px;
   padding: 5px 10px;
-  background-color:#fff;
 }
 .overlay .saveinfo {
   float:right;
@@ -238,15 +225,15 @@ background-image: linear-gradient(to bottom, #FFFEED 0%, #EFE1C6 100%);
 	line-height: 0;
 	height: 0;
 }
- 
+
 .clearfix {
 	display: inline-block;
 }
- 
+
 html[xmlns] .clearfix {
 	display: block;
 }
- 
+
 * html .clearfix {
 	height: 1%;
 }

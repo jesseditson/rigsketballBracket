@@ -13,18 +13,15 @@ var submit = function(req,res,next){
   // return res.json({body : req.body, query : req.query, referer : req.headers.referer});
   //if(!req.session.signingup || !req.query.bandNum) return res.redirect('/')
   //delete req.session.signingup
-  console.log('signup body',req.body,'query',req.query);
+  // console.log('signup body',req.body,'query',req.query);
   req.body.operation = 'saveBand'
   var bandNum = req.body.bandNum;
   if (!bandNum) {
     Object.keys(req.body).forEach(function(key){
       if (/clickto\d+/i.test(key)) {
-        console.log('found key',key);
         var parsedURL = url.parse(req.body[key] || '',true);
-        console.log('parsed url ',parsedURL);
         if (parsedURL && parsedURL.query && parsedURL.query.bandNum) {
           bandNum = parsedURL.query.bandNum
-          console.log('band num', bandNum);
         }
       }
     });
