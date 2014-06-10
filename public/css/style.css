@@ -1,8 +1,18 @@
+html, body {
+  width:100%;
+  margin:0px;
+}
+
 body, input {
   font-size:12px;
   font-family:"existenceunicase_light", "Helvetica Neue", "Helvetica", Arial, sans-serif;
   font-weight:700;
   color:rgb(78, 80, 62);
+}
+#background {
+  width:100%;
+  height:100%;
+  position:absolute;
 }
 a {
   color:rgb(71,71,71);
@@ -18,7 +28,8 @@ a:hover {
 }
 #content {
   position:relative;
-  width: 998px;
+  width: 100%;
+  min-width:848px;
   height: 730px;
   z-index:0;
 }
@@ -54,9 +65,10 @@ a:hover {
 }
 #brackets {
   margin:0px auto;
-  width: 948px;
+  width: 100%;
   position:absolute;
   background-image:url('/images/bigBg.png');
+  background-position: center;
 }
 .bracket {
   float:left;
@@ -129,17 +141,24 @@ a:hover {
 .bandName {
   height:20px;
 }
+.bracket {
+  position:relative;
+}
 .round32 > .bracket {
-  margin: 10px 0px;
+  top: 10px;
+  margin-bottom:20px;
 }
 .round16 > .bracket{
-  margin: 55px 0px;
+  top: 55px;
+  margin-bottom:110px;
 }
 .round8 > .bracket {
-  margin: 143px 0px;
+  top:143px;
+  margin-bottom: 286px;
 }
 .round4 > .bracket {
-  margin: 320px 0px;
+  top:320px;
+  margin-bottom:640px;
 }
 .winnerRound, #brackets > .winner {
   position:absolute;
