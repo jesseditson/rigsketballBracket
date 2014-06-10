@@ -28,8 +28,8 @@ a:hover {
 }
 #content {
   position:relative;
-  width: 100%;
-  min-width:848px;
+  width: 90%;
+  min-width:858px;
   height: 730px;
   z-index:0;
 }
@@ -130,6 +130,7 @@ a:hover {
 }
 .leftRounds {
   float:right;
+  padding-right:10px;
 }
 .round {
   float:right;
