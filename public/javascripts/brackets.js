@@ -10,7 +10,6 @@ $(function(){
   }
   $('.bandName').each(adjustFont)
 
-
   var qp = window.location.search.replace(/^\?/,'').split('=')
   var query = {}
   var key
@@ -120,6 +119,11 @@ $(function(){
     })
     .on('mouseenter','.bracket',showInfo)
     .on('mouseleave','.bracket',hideInfo)
+    .on('click','.signup_link',function(el){
+      var num = $(el.currentTarget).attr('data-num')
+      var link = '//' + window.location.host + '/signup?bandNum=' + num
+      window.location = link
+    })
 
   $('body')
     .on('click','.close',function(){
