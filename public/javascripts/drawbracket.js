@@ -1,4 +1,5 @@
-(function(){
+$(function(){
+  if($("#mobile-brackets").length) return;
   var paper = Raphael('background');
 
   var drawLines = function(side){
@@ -46,4 +47,4 @@
     drawLines('.leftRounds')
     drawLines('.rightRounds')
   })
-})()
+})

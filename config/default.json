@@ -21,8 +21,8 @@
   "client" : {
     "css" : {
       "all" : ["style","Existence/stencil/stylesheet","Existence/unicase/stylesheet"],
-      "touch" : [],
-      "web" : []
+      "touch" : ["mobile"],
+      "web" : ["web"]
     },
     "cdnjavascripts" : {
       "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" : "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
@@ -30,7 +30,8 @@
     "javascripts" : [
       "brackets",
       "raphael",
-      "drawbracket"
+      "drawbracket",
+      "mobile"
     ]
   }
 }

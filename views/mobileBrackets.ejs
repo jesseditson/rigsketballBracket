@@ -1,0 +1,20 @@
+<%- layout('layout') -%>
+<div id="mobile-brackets">
+  <% Object.keys(brackets).reverse().forEach(function(roundNum){ %>
+    <div class="round-page">
+      <h2>Round of <%= roundNum %></h2>
+      <% var round = brackets[roundNum]; %>
+      <% Object.keys(round).forEach(function(position){ %>
+        <% bracket = round[position] %>
+        <div class="match" data-position="<%=position%>" data-round="<%=bracket.round%>" data-date="<%=bracket.date%>" data-location="<%=bracket.location%>">
+          <div class="contender first">
+            <%- partial('bracket',{band : bracket.bands[0], bracket : bracket, bandNum : bracket.position, index : 0}) -%>
+          </div>
+          <div class="contender second">
+            <%- partial('bracket',{band : bracket.bands[1], bracket : bracket, bandNum : (bracket.round/2) + bracket.position, index : 1}) -%>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% }) %>
+</div>

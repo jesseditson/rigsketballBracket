@@ -1,0 +1,25 @@
+#content {
+  width:100%;
+  overflow:auto;
+}
+#mobile-brackets {
+  width:500%;
+  height:100%;
+  position:absolute;
+}
+#mobile-brackets .round-page {
+  width:20%;
+  float:left;
+  position:relative;
+}
+#mobile-brackets .round-page > h2 {
+  text-align:center;
+}
+
+#mobile-brackets .round-page .contender {
+  width:40%;
+  float:left;
+}
+#mobile-brackets .round-page .contender.second {
+  float:right;
+}
