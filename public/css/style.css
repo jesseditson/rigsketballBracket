@@ -57,77 +57,11 @@ a:hover {
 #signup .secret {
   display:none;
 }
-.secret {
-  position:absolute;
-  bottom:2px;
-  right:2px;
-}
 .secret a {
   color:#000;
   text-decoration:none;
 }
-#brackets {
-  margin:0px auto;
-  width: 100%;
-  position:absolute;
-  background-image:url('/images/bigBg.png');
-  background-position: center;
-}
-.bracket {
-  float:left;
-  clear:both;
-  cursor:pointer;
-}
-.contender:nth-child(odd) {
-  margin-bottom: 2px;
-}
-.contender a {
-  text-decoration:none;
-  color: rgb(60, 60, 34);
-}
-.contender a:hover {
-  color:black;
-}
-.contender {
-  background-color:#ccc;
-  /*box-shadow: 0px 0px 5px 0px #999;*/
-  line-height: 0px 0px 5px 0px rgb(153, 153, 153);
-  border: 1px solid #999;
-  padding:8px;
-  width: 72px;
-  height: 16px;
-  text-align:center;
-  position:relative;
-  border-radius:2px;
-}
-.contender.second {
 
-}
-.contender .indicator {
-  right: -38px;
-  top: -19px;
-  position: absolute;
-  z-index:100;
-  width:50px;
-  height:44px;
-  background:url('/images/ball.png');
-  background-repeat:no-repeat;
-}
-.contender .winner {
-  background:url('/images/fireball.png');
-}
-.contender .score {
-  position:absolute;
-  right: -98px;
-  top:0px;
-  font-weight:700;
-  z-index:200;
-  width:100px;
-  text-align: left;
-}
-.contender .scorenum {
-  width:20px;
-}
 .rightRounds {
   float:left;
 }
@@ -191,26 +125,10 @@ a:hover {
   float:left;
 }
 
-.savebutton {
-  position:absolute;
-  top:6px;
-  left:90px;
-  display:none;
-}
 .ss-item input {
   font-family : "Helvetica";
 }
 
-.overlay {
-  z-index:200;
-  position: absolute;
-  background: #f2f2f2;
-  padding: 10px;
-  border-radius: 5px;
-  border:5px solid rgba(200,200,200,0.5);
-  width:320px;
-  display:none;
-}
 .overlay .close {
   position:absolute;
   top:5px;

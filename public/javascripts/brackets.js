@@ -10,6 +10,7 @@ $(function(){
   }
   $('.bandName').each(adjustFont)
 
+  var mobile = $('#mobile-brackets').length;
   var qp = window.location.search.replace(/^\?/,'').split('=')
   var query = {}
   var key
@@ -36,7 +37,7 @@ $(function(){
       bandname : inp.val(),
       position : inp.attr('name')
     },function(){
-      if(signingup) window.location = '/'
+      if(signingup && !mobile) window.location = '/'
     })
   }
 
@@ -59,14 +60,28 @@ $(function(){
   var currentBracket
   $("body")
     .on('click','.saveinfo',function(){
+      var round = currentBracket.attr('data-round');
+      var position = currentBracket.attr('data-position');
+      var band1score = $(this).closest('#infoOverlay').find('.band1score').val();
+      var band2score = $(this).closest('#infoOverlay').find('.band2score').val();
       save({
         operation : 'setInfo',
-        round : currentBracket.attr('data-round'),
-        position : currentBracket.attr('data-position'),
+        round : round,
+        position : position,
         location : $(this).closest('#infoOverlay').find('.location').val(),
-        date : $(this).closest('#infoOverlay').find('.date').val()
-      },function(){
-        window.location.href = window.location.href
+        date : $(this).closest('#infoOverlay').find('.date').val(),
+        band1score : band1score,
+        band2score : band2score,
+        band1position : $(this).closest('#infoOverlay').find('.band1score').attr('data-position'),
+        band2position : $(this).closest('#infoOverlay').find('.band2score').attr('data-position')
+      },function(response){
+        $('.contender.first .score[data-position="'+position+'"][data-round="'+round+'"]').html(band1score);
+        $('.contender.second .score[data-position="'+position+'"][data-round="'+round+'"]').html(band2score);
+        if(mobile){
+          hideInfo();
+        } else {
+          window.location.href = window.location.href
+        }
       })
     })
 
@@ -75,12 +90,18 @@ $(function(){
     if(overlayOn) return
     if(toggle === true) overlayOn = true
     var b = $(this)
+    if(!b.is('.match')) b = $(this).closest('.match');
     currentBracket = b
-    o.css(getOnScreenPos(b.offset(),80,350,30))
     var b1 = b.find('.first.contender .bandName')
     var b2 = b.find('.second.contender .bandName')
-    if(b1.find('input').length){ b1 = "???" } else { b1 = b1.html() }
-    if(b2.find('input').length){ b2 = "???"} else { b2 = b2.html() }
+    if(b1.find('input').length){
+      var v = b1.find('input').val();
+      b1 = v || "???"
+    } else { b1 = b1.html() }
+    if(b2.find('input').length){
+      var v = b2.find('input').val();
+      b2 = v || "???"
+    } else { b2 = b2.html() }
     o.find('.band1').html(b1)
     o.find('.band2').html(b2)
     var d = o.find('.date')
@@ -91,21 +112,43 @@ $(function(){
       d.html(datavalue(b,'date'))
     }
     l.html(datavalue(b,'location'))
-    o.fadeIn(200)
+    var b1score = b.find('.first.contender .score')
+    var b2score = b.find('.second.contender .score')
+    var b1pos = b.find('.first.contender input[type="text"]').attr('name');
+    var b2pos = b.find('.second.contender input[type="text"]').attr('name');
+    o.find('.band1score').attr('data-position',b1pos);
+    o.find('.band2score').attr('data-position',b2pos);
+    if(b1score){
+      o.find('.band1score').val(b1score);
+    }
+    if(b2score){
+      o.find('.band1score').val(b2score);
+    }
+    if(mobile){
+      if(toggle){
+        o.toggleClass('showing');
+      } else {
+        o.addClass('showing');
+      }
+    } else {
+      o.css(getOnScreenPos(b.offset(),80,350,30))
+      o.fadeIn(200)
+    }
   }
   var hideInfo = function(toggle){
     if(overlayOn && toggle !== true) return
     overlayOn = false
-    $(this).closest('.overlay').fadeOut(200)
+    if(mobile){
+      $('.overlay').removeClass('showing');
+    } else {
+      $(this).closest('.overlay').fadeOut(200)
+    }
   }
-
+  $('body').on('click','.close',function(){
+    hideInfo.call(this,true)
+  })
+  $('.savebutton').on('click',saveclicked);
   $("#brackets")
-    .on('focus','.bandName input',function(){
-      var savebutton = $(this).closest('.contender').find('.savebutton').first()
-      if(query.bandname) $(this).val(query.bandname)
-      savebutton.on('click',saveclicked)
-      showButton(savebutton)
-    })
     .on('blur','.bandName input',function(e){
       if ($(e.currentTarget).is('input')) {
         saveclicked.call(this,e);
@@ -117,39 +160,50 @@ $(function(){
     .on('click','.bracket',function(){
       showInfo.call(this,true)
     })
-    .on('mouseenter','.bracket',showInfo)
-    .on('mouseleave','.bracket',hideInfo)
     .on('click','.signup_link',function(el){
       var num = $(el.currentTarget).attr('data-num')
       var link = '//' + window.location.host + '/signup?bandNum=' + num
       window.location = link
     })
-
-  $('body')
-    .on('click','.close',function(){
-      hideInfo.call(this,true)
-    })
-    .on('mouseleave','.overlay',hideInfo)
-
-  $(".loggedin #brackets")
-    .on('click','.score',function(){
-      if($(this).find('input').length) return
-      var initialVal = parseInt($(this).html(),10)
-      $(this).html('<input type="tel" placeholder="##" value="'+initialVal+'" name="score" class="scorenum"/><input type="button" class="savescore" value="save"/>')
-    })
-    .on('click','.score .savescore',function(){
-      var c = $(this).closest('.contender')
-      var num = c.find('.score').attr('data-position')
-      var round = c.find('.score').attr('data-round')
-      var score = c.find('.scorenum').val()
-      c.find('.score').html(score)
-      save({
-        operation : 'editScore',
-        score : score,
-        position : num,
-        round : round
+  if(!mobile){
+    $('#brackets')
+      .on('focus','.bandName input',function(){
+        var savebutton = $(this).closest('.contender').find('.savebutton').first()
+        if(query.bandname) $(this).val(query.bandname)
+        savebutton.on('click',saveclicked)
+        showButton(savebutton)
       })
-    })
+      .on('mouseenter','.bracket',showInfo)
+      .on('mouseleave','.bracket',hideInfo)
+
+    $('body')
+      .on('mouseleave','.overlay',hideInfo)
+
+    $(".loggedin #brackets")
+      .on('click','.score',function(){
+        if($(this).find('input').length) return
+        var initialVal = parseInt($(this).html(),10)
+        $(this).html('<input type="tel" placeholder="##" value="'+initialVal+'" name="score" class="scorenum"/><input type="button" class="savescore" value="save"/>')
+      })
+      .on('click','.score .savescore',function(){
+        var c = $(this).closest('.contender')
+        var num = c.find('.score').attr('data-position')
+        var round = c.find('.score').attr('data-round')
+        var score = c.find('.scorenum').val()
+        c.find('.score').html(score)
+        save({
+          operation : 'editScore',
+          score : score,
+          position : num,
+          round : round
+        })
+      })
+    } else {
+      $('body').on('click','.match',function(e){
+        var el = $(e.target);
+        if(el.is('.match')) showInfo.apply(this,arguments);
+      });
+    }
 
     var showButton = function(button){
       button.show().css({opacity : 0,left:0}).animate({left:90,opacity:1},200)

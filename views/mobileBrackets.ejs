@@ -1,8 +1,14 @@
 <%- layout('layout') -%>
 <div id="mobile-brackets">
-  <% Object.keys(brackets).reverse().forEach(function(roundNum){ %>
+  <% Object.keys(brackets).reverse().forEach(function(roundNum, index){ %>
     <div class="round-page">
-      <h2>Round of <%= roundNum %></h2>
+      <div class="top-bg"></div>
+      <h2>
+        <% if(index > 0){ %><span class="left arrow">&#12296;</span><% } %>
+          Round of <%= roundNum %>
+        <% if(index < 4){ %><span class="right arrow">&#12297;</span><% } %>
+      </h2>
+      <div class="round-content">
       <% var round = brackets[roundNum]; %>
       <% Object.keys(round).forEach(function(position){ %>
         <% bracket = round[position] %>
@@ -15,6 +21,8 @@
           </div>
         </div>
       <% }) %>
+      </div>
     </div>
   <% }) %>
+  <%- partial('infoOverlay') -%>
 </div>
