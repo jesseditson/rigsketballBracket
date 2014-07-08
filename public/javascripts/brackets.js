@@ -1,4 +1,7 @@
 $(function(){
+  if(!/\/mobile/i.test(window.location.href) && $(window).width() < 800){
+    window.location = '/mobile'
+  }
   var mobile = $('#mobile-brackets').length;
   if(!mobile){
     // init - make sure band names are correctly sized
