@@ -81,9 +81,10 @@ $(function(){
         $('.contender.second .score[data-position="'+position+'"][data-round="'+round+'"]').html(band2score);
         if(mobile){
           hideInfo();
-        } else {
-          window.location.href = window.location.href
         }
+        setTimeout(function(){
+          window.location.reload();
+        },200)
       })
     })
 
@@ -116,8 +117,8 @@ $(function(){
     l.html(datavalue(b,'location'))
     var b1score = parseInt(b.find('.first.contender .score').html(),10);
     var b2score = parseInt(b.find('.second.contender .score').html(),10);
-    var b1pos = b.find('.first.contender input[type="text"]').attr('name');
-    var b2pos = b.find('.second.contender input[type="text"]').attr('name');
+    var b1pos = b.find('.first.contender .score').attr('data-position');
+    var b2pos = b.find('.second.contender .score').attr('data-position');
     o.find('.band1score').attr('data-position',b1pos);
     o.find('.band2score').attr('data-position',b2pos);
     if(b1score){
