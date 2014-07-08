@@ -1,16 +1,18 @@
 $(function(){
-  // init - make sure band names are correctly sized
-  function adjustFont(){
-    var t = this
-    if(!!(t.scrollHeight - $(t).height())){
-      var fontSize = parseInt($(t).css('font-size'),10)
-      $(t).css('font-size',(--fontSize) + 'px')
-      if(fontSize > 6) adjustFont.call(t)
-    }
-  }
-  $('.bandName').each(adjustFont)
-
   var mobile = $('#mobile-brackets').length;
+  if(!mobile){
+    // init - make sure band names are correctly sized
+    function adjustFont(){
+      var t = this
+      if(!!(t.scrollHeight - $(t).height())){
+        var fontSize = parseInt($(t).css('font-size'),10)
+        $(t).css('font-size',(--fontSize) + 'px')
+        if(fontSize > 6) adjustFont.call(t)
+      }
+    }
+    $('.bandName').each(adjustFont)
+  }
+
   var qp = window.location.search.replace(/^\?/,'').split('=')
   var query = {}
   var key
@@ -112,8 +114,8 @@ $(function(){
       d.html(datavalue(b,'date'))
     }
     l.html(datavalue(b,'location'))
-    var b1score = b.find('.first.contender .score')
-    var b2score = b.find('.second.contender .score')
+    var b1score = parseInt(b.find('.first.contender .score').html(),10);
+    var b2score = parseInt(b.find('.second.contender .score').html(),10);
     var b1pos = b.find('.first.contender input[type="text"]').attr('name');
     var b2pos = b.find('.second.contender input[type="text"]').attr('name');
     o.find('.band1score').attr('data-position',b1pos);
@@ -122,7 +124,7 @@ $(function(){
       o.find('.band1score').val(b1score);
     }
     if(b2score){
-      o.find('.band1score').val(b2score);
+      o.find('.band2score').val(b2score);
     }
     if(mobile){
       if(toggle){
