@@ -20,13 +20,13 @@
 
   </head>
   <body <% if(user){ %> class="loggedin" <% } %>>
-    <header>
     <% if(user){ %>
-      <div class="userinfo">
-        <h5>Logged in as <%= user.username%>. <a href="/logout">(log out)</a></h5>
-      </div>
+      <header>
+        <div class="userinfo">
+          <h5>Logged in as <%= user.username%>. <a href="/logout">(log out)</a></h5>
+        </div>
+      </header>
     <%}%>
-    </header>
     <div id="content" class="clearfix">
       <%- body %>
       <% if(!user){ %>
