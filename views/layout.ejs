@@ -6,9 +6,9 @@
     <%-
       Object.keys(stylesheets).reduce(function(str,type){
         var query = (type == 'touch')
-            ? 'screen and (max-width: 480px)'
+            ? 'screen and (max-width: 800px)'
             : type == 'web'
-            ? 'screen and (min-width: 480px)'
+            ? 'screen and (min-width: 800px)'
             : 'screen'
         stylesheets[type].forEach(function(url){
           str += '<link rel="stylesheet" href="'+url+'" media="'+query+'"/>\n'
@@ -16,7 +16,7 @@
         return str
       },"")
     %>
-    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" />
+    <meta name="viewport" id="vp" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1" />
 
   </head>
   <body <% if(user){ %> class="loggedin" <% } %>>
@@ -29,11 +29,6 @@
     <%}%>
     <div id="content" class="clearfix">
       <%- body %>
-      <% if(!user){ %>
-        <div class="secret">
-          <a href="/login">&prod;</a>
-        </div>
-      <%}%>
     </div>
     <!-- modernizr -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>

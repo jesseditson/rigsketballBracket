@@ -1,6 +1,6 @@
       <% Object.keys(round).forEach(function(position){ %>
         <% bracket = round[position] %>
-        <div class="bracket" data-position="<%=position%>" data-round="<%=bracket.round%>" data-date="<%=bracket.date%>" data-location="<%=bracket.location%>">
+        <div class="bracket match" data-position="<%=position%>" data-round="<%=bracket.round%>" data-date="<%=bracket.date%>" data-location="<%=bracket.location%>">
           <div class="contender first">
             <%- partial('bracket',{band : bracket.bands[0], bracket : bracket, bandNum : bracket.position, index : 0}) -%>
           </div>

@@ -1,7 +1,15 @@
 $(function(){
-  if(!/\/mobile/i.test(window.location.href) && $(window).width() < 800){
-    window.location = '/mobile'
-  }
+  if(!/^\/(mobile)?$/i.test(window.location.pathname)) return;
+  // respond to the window width
+  setInterval(function(){
+    var mobileurl = /\/mobile/i.test(window.location.pathname);
+    var mobilewidth = $(window).width() < 800;
+    if(!mobileurl && mobilewidth){
+      window.location = '/mobile'
+    } else if(mobileurl && !mobilewidth){
+      window.location = '/'
+    }
+  },500);
   var mobile = $('#mobile-brackets').length;
   if(!mobile){
     // init - make sure band names are correctly sized
@@ -137,7 +145,7 @@ $(function(){
         o.addClass('showing');
       }
     } else {
-      o.css(getOnScreenPos(b.offset(),80,350,30))
+      //o.css(getOnScreenPos(b.offset(),200,350,30))
       o.fadeIn(200)
     }
   }

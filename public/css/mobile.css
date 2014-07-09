@@ -9,8 +9,6 @@ header {
 }
 #content {
   width:100%;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
 }
 #mobile-brackets {
   width:500%;
@@ -128,7 +126,7 @@ header {
   display:none;
 }
 
-#mobile-brackets .overlay {
+.overlay {
   width:98%;
   position:fixed;
   z-index:1000;
@@ -136,41 +134,41 @@ header {
   padding:1%;
   background-color:white;
   background-color:rgba(255,255,255,0.95);
-  top:100%;
+  top:300%;
   transition: top 0.2s ease-out;
 }
-#mobile-brackets .overlay.showing {
+.overlay.showing {
   top:0%;
 }
-#mobile-brackets .overlay .close {
+.overlay .close {
   position:absolute;
   font-size: 50px;
   line-height: 20px;
 }
-#mobile-brackets .overlay .vs {
+.overlay .vs {
   width:100%;
 }
-#mobile-brackets .overlay .vs h5 {
+.overlay .vs h5 {
   width:10%;
 }
-#mobile-brackets .overlay .vs .band1,
-#mobile-brackets .overlay .vs .band2 {
+.overlay .vs .band1,
+.overlay .vs .band2 {
   width:40%;
   text-align:center;
 }
-#mobile-brackets .overlay .vs input {
+.overlay .vs input {
   border:none;
   border-bottom:1px dotted #999;
   width:40%;
   text-align:center;
 }
-#mobile-brackets .overlay .vs input:last-child {
+.overlay .vs input:last-child {
   float:right;
 }
-#mobile-brackets .overlay input {
+.overlay input {
   font-size:24px;
 }
-#mobile-brackets .overlay input[type="button"] {
+.overlay input[type="button"] {
   font-size:24px;
   border:none;
   width:100%;

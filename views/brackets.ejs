@@ -25,3 +25,8 @@
 <!--<#% if (typeof insertAllowed == "undefined" || !insertAllowed) { %>-->
 <%- partial('infoOverlay') -%>
 <!--<#% } %>-->
+<% if(!user){ %>
+  <div class="secret">
+    <a href="/login">&prod;</a>
+  </div>
+<%}%>

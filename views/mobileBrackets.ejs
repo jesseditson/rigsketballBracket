@@ -4,7 +4,13 @@
     <div class="round-page">
       <div class="top-bg"></div>
       <h2>
-        <% if(index > 0){ %><span class="left arrow">&#12296;</span><% } %>
+        <% if(index > 0){ %><span class="left arrow">&#12296;</span><% } else { %>
+          <% if(!user){ %>
+            <div class="secret">
+              <a href="/login">&prod;</a>
+            </div>
+          <%}%>
+        <% } %>
           Round of <%= roundNum %>
         <% if(index < 4){ %><span class="right arrow">&#12297;</span><% } %>
       </h2>
@@ -24,5 +30,5 @@
       </div>
     </div>
   <% }) %>
-  <%- partial('infoOverlay') -%>
 </div>
+<%- partial('infoOverlay') -%>
